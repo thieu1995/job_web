@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div id="job_wrapper">
+    <div id="top_info">
+        <h2 class="job_title" style="color: blue">{{job.job_title}}</h2>
+        <p class="updated_date"><span>Ngày cập nhật:</span> {{job.updated_date}}</p>
+        <h4 class="company_name"><span>Công ty: </span>{{job.company_title}}</h4>
+        <p class="company_address"><span>Địa chỉ: </span>{{job.work_location}}</p>
+    </div>
+
+
+    <div class="box_detail">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="detail_job_title">Mức lương: </span>
+                        {% if job.salary %}
+                            <span>{{job.salary}}</span>
+                        {% else %}
+                            <span>Thỏa thuận</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span class="detail_job_title">Kinh nghiệm: </span>
+                        {% if job.experience %}
+                            <span>{{job.experience}}</span>
+                        {% else %}
+                            <span>Không yêu cầu</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="detail_job_title">Cấp bậc: </span>
+                        {% if job.level %}
+                            <span>{{job.level}}</span>
+                        {% else %}
+                            <span>Nhiều vị trí</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span class="detail_job_title">Tỉnh/Thành phố: </span>
+                        {% if job.work_location %}
+                            <span>{{job.work_location}}</span>
+                        {% else %}
+                            <span>Nhiều địa điểm</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="detail_job_title">Ngành nghề: </span>
+                        {% if job.category %}
+                            <span>{{job.category}}</span>
+                        {% else %}
+                            <span>Chưa phân ngành nghề</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span class="detail_job_title">Ngày hết hạn: </span>
+                        {% if job.deadline %}
+                            <span>{{job.deadline}}</span>
+                        {% else %}
+                            <span>Vô thời hạn</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="box_description">
+        <h3 class="general_title">Mô tả công việc</h3>
+        <div class="box_wrapper">
+            {% autoescape false %}
+                {{job.job_description | safe | replace("\r", "") | replace("\n", "") | replace("\t", "") }}
+            {% endautoescape %}
+        </div>
+    </div>
+
+    <div class="box_requirement">
+        <h3 class="general_title">Yêu cầu công việc</h3>
+        <div class="box_wrapper">
+            {% autoescape false %}
+                {{job.job_requirement | safe | replace("\r", "") | replace("\n", "") | replace("\t", "")}}
+            {% endautoescape %}
+        </div>
+    </div>
+
+    <div class="box_other_information">
+        {% if job.other_information %}
+            <h3 class="general_title">Thông tin khác</h3>
+            <div class="box_wrapper">
+                {% autoescape false %}
+                    {{job.other_information | safe | replace("\r", "") | replace("\n", "") | replace("\t", "")}}
+                {% endautoescape %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="box_tags">
+        {% if job.tags %}
+            <h4 class="general_title">Tags</h4>
+            <div class="box_wrapper">
+                {{job.tags}}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}

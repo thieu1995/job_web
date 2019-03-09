@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Vị trí tuyển dụng</th>
+        <th scope="col">Khu vực</th>
+        <th scope="col">Lương</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for job in jobs %}
+        <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>
+                <div><a href="{{ url_for('job', job_id=job.stt) }}">{{ job.job_title }}</a></div>
+                <div>By: {{ job.company_title }}</div>
+            </td>
+            <td>
+                {{ job.work_location }}
+            </td>
+            <td>
+                {{ job.salary }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
